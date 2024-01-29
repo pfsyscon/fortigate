@@ -746,3 +746,5 @@ autenticacao-gov.pt-ver.com
 autenticacao-gov.pt-veri.com
 autenticacao-gov.pt-aut.live
 autenticacao-gov.pt-sdc.live
+contratos-comercial.com
+
