@@ -761,4 +761,5 @@ machineviewers.com
 tipstoway.com
 plombeiremsm.com
 tome.app
-
+cmd-remover.com 
+cmd-bloquear.com
