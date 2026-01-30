@@ -829,3 +829,5 @@ gtfrdewsqjdf.bond
 fgdjhkjkhewkjlkdef.bond
 tryuiouiytredf.shop
 nnn22l.bond
+gui-snitch.online
+dev-snitch.online
