@@ -969,7 +969,7 @@ onwillaqweeuk.site
 accounts.ukr.net.0-8s.com
 api-available-checker.com
 accounts.auth.confirmation.com.0002929.com
-accounts.login.verification.check.0-8s.com,
+accounts.login.verification.check.0-8s.com
 mail.vppnr.gp.gov.ua.0002929.com
 mail.kyiv.gp.gov.ua.0002929.com
 activation-planner.pro
