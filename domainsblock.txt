@@ -973,3 +973,10 @@ accounts.login.verification.check.0-8s.com
 mail.vppnr.gp.gov.ua.0002929.com
 mail.kyiv.gp.gov.ua.0002929.com
 activation-planner.pro
+istc-cloud.com
+zimbrastat.com
+acocdn.com
+zimbrasoft.com.ua
+analyticemailmeter.com
+emailanalytics.com.ua
+asecdns.com
