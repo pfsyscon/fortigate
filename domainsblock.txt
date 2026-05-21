@@ -1050,3 +1050,6 @@ docs-ggle.site
 docsgoogle.site
 gclick.space
 gooclick.tech
+wamblefroops.com
+snickershmee.com
+brabblefritz.com
