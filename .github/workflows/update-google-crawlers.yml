@@ -1,0 +1,43 @@
+# .github/workflows/update-google-crawlers.yml
+name: Update Google crawler IP list
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # a cada 6h
+  workflow_dispatch:         # permite correr manualmente
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch and merge Google IP ranges
+        run: |
+          python3 - <<'EOF'
+          import json, urllib.request
+
+          urls = [
+              "https://developers.google.com/search/apis/ipranges/googlebot.json",
+              "https://developers.google.com/static/search/apis/ipranges/special-crawlers.json",
+          ]
+
+          prefixes = set()
+          for url in urls:
+              data = json.loads(urllib.request.urlopen(url).read())
+              for entry in data.get("prefixes", []):
+                  cidr = entry.get("ipv4Prefix") or entry.get("ipv6Prefix")
+                  if cidr:
+                      prefixes.add(cidr)
+
+          with open("google-crawlers.txt", "w") as f:
+              f.write("\n".join(sorted(prefixes)) + "\n")
+          EOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add google-crawlers.txt
+          git diff --cached --quiet || git commit -m "Update Google crawler IP list"
+          git push
