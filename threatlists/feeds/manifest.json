@@ -1,0 +1,66 @@
+{
+  "feeds": {
+    "domain-block.txt": {
+      "count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "domain-monitor.txt": {
+      "count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "hash-md5.txt": {
+      "count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "hash-sha1.txt": {
+      "count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "hash-sha256.txt": {
+      "count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ip-block.txt": {
+      "count": 5,
+      "sha256": "2b68316e14a85547e97be216916de6f9ab41896d329e7f781c2f57d1e74b4ead"
+    },
+    "ip-monitor.txt": {
+      "count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "inbox_files": 0,
+  "sources": {
+    "bazaar-sha256": {
+      "license": "abuse.ch fair use (uso comercial pode exigir subscrição)",
+      "state": "ignorada (licença por confirmar)",
+      "status": "pending"
+    },
+    "blocklist-de": {
+      "license": "sem termos publicados (\"as they are\")",
+      "state": "ignorada (licença por confirmar)",
+      "status": "pending"
+    },
+    "cins-army": {
+      "license": "sem licença declarada (\"use em qualquer forma\"); só HTTP",
+      "state": "ignorada (licença por confirmar)",
+      "status": "pending"
+    },
+    "feodo": {
+      "license": "CC0",
+      "state": "ok",
+      "status": "verified"
+    },
+    "threatfox-ip": {
+      "license": "abuse.ch fair use (uso comercial pode exigir subscrição)",
+      "state": "ignorada (licença por confirmar)",
+      "status": "pending"
+    },
+    "urlhaus-hosts": {
+      "license": "abuse.ch fair use (uso comercial pode exigir subscrição)",
+      "state": "ignorada (licença por confirmar)",
+      "status": "pending"
+    }
+  },
+  "updated": "2026-10-12T16:25:11Z"
+}
