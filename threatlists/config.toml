@@ -1,0 +1,108 @@
+# Configuração do gerador de listas (threatlists/build.py). Caminhos relativos à raiz do repositório.
+
+[policy]
+min_prefix_v4 = 16              # redes IPv4 mais largas que /16 são recusadas (quase sempre um erro do feed)
+inbox_default_ttl_days = 30     # validade de uma entrada do inbox sem "# expires:"
+inbox_default_class = "block"   # nível de uma entrada do inbox sem "# class:" (block | monitor)
+
+[breaker]                       # circuit breaker: protege os firewalls de uma atualização anómala
+min_previous = 50               # só se aplica a listas que já tinham pelo menos isto
+max_change_pct = 50             # variação acima disto bloqueia a publicação dessa lista e faz o job falhar
+
+[limits]                        # teto por lista (entradas). A confirmar por modelo na documentação do FortiOS.
+"ip-block.txt" = 30000
+"ip-monitor.txt" = 60000
+"domain-block.txt" = 50000
+"domain-monitor.txt" = 100000
+"hash-md5.txt" = 100000
+"hash-sha1.txt" = 100000
+"hash-sha256.txt" = 100000
+
+[allowlist]
+files = ["threatlists/allowlist.txt"]
+# Listas já existentes no repositório, só LIDAS (nunca alteradas): o que aí está nunca deve ser bloqueado.
+external = ["IP_Exceptions", "Microsoft_IPs", "google-crawlers.txt"]
+
+# ── Fontes ────────────────────────────────────────────────────────────────────────
+# status = "verified": licença confirmada, entra nas listas publicadas.
+# status = "pending":  licença por confirmar. NÃO publica (o repositório é público); só entra com --allow-pending, em testes locais.
+# confidence = "high": bloqueia sozinha. "normal"/"low": só bloqueia se 2+ fontes concordarem (senão fica em monitor).
+
+[[source]]
+id = "feodo"
+name = "abuse.ch Feodo Tracker (botnet C2)"
+url = "https://feodotracker.abuse.ch/downloads/ipblocklist.txt"
+kind = "ip"
+format = "lines"
+confidence = "high"
+status = "verified"
+license = "CC0"
+terms_url = "https://feodotracker.abuse.ch/blocklist/"
+min_entries = 1
+notes = "Lista pequena por natureza (desmantelamentos); regenerada de 5 em 5 min."
+
+[[source]]
+id = "urlhaus-hosts"
+name = "abuse.ch URLhaus (hosts de malware ativos)"
+url = "https://urlhaus.abuse.ch/downloads/hostfile/"
+kind = "domain"
+format = "hosts"
+confidence = "normal"
+status = "pending"
+license = "abuse.ch fair use (uso comercial pode exigir subscrição)"
+terms_url = "https://urlhaus.abuse.ch/api/"
+min_entries = 20
+notes = "Confirmar com a abuse.ch se o uso por um MSP e a republicação são permitidos."
+
+[[source]]
+id = "threatfox-ip"
+name = "abuse.ch ThreatFox (IP:porto, confiança >= 75)"
+url = "https://threatfox.abuse.ch/export/csv/ip-port/recent/"
+kind = "ip"
+format = "csv"
+column = 2
+min_conf_column = 9
+min_conf = 75
+confidence = "normal"
+status = "pending"
+license = "abuse.ch fair use (uso comercial pode exigir subscrição)"
+terms_url = "https://threatfox.abuse.ch/faq/#tos"
+min_entries = 20
+
+[[source]]
+id = "bazaar-sha256"
+name = "abuse.ch MalwareBazaar (SHA256 recentes)"
+url = "https://bazaar.abuse.ch/export/txt/sha256/recent/"
+kind = "sha256"
+format = "lines"
+confidence = "normal"
+status = "pending"
+license = "abuse.ch fair use (uso comercial pode exigir subscrição)"
+terms_url = "https://bazaar.abuse.ch/faq/#tos"
+min_entries = 50
+
+[[source]]
+id = "blocklist-de"
+name = "blocklist.de (ataques das últimas 48 h)"
+url = "https://lists.blocklist.de/lists/all.txt"
+kind = "ip"
+format = "lines"
+confidence = "low"
+status = "pending"
+license = "sem termos publicados (\"as they are\")"
+terms_url = "https://www.blocklist.de/en/export.html"
+min_entries = 1000
+notes = "Muito ruído (força bruta SSH/e-mail): nunca bloqueia sozinha."
+
+[[source]]
+id = "cins-army"
+name = "CINS Army (ci-badguys)"
+url = "http://cinsscore.com/list/ci-badguys.txt"
+kind = "ip"
+format = "lines"
+confidence = "low"
+status = "pending"
+license = "sem licença declarada (\"use em qualquer forma\"); só HTTP"
+terms_url = "https://cinsscore.com/"
+min_entries = 1000
+notes = "Só HTTP (sem TLS): integridade não garantida."
