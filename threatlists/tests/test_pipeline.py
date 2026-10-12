@@ -368,8 +368,15 @@ class Inject(Base):
         self.assertIn("# class: block", text)
 
     def test_texto_enorme_e_recusado(self):
-        p = self.run_inject("a" * 600_000)
+        big = self.root / "big.txt"                    # por ficheiro: no Linux uma variável de ambiente não passa de 128 KiB
+        big.write_text("a" * 150_000, encoding="utf-8")
+        p = self.run_inject("", "--file", str(big))
         self.assertEqual(p.returncode, 1)
+        self.assertIn("demasiado grande", p.stdout)
+
+    def test_texto_no_limite_e_aceite(self):
+        p = self.run_inject("5.5.5.5 " + "x " * 40_000)         # ~80 000 carateres, abaixo do limite
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
 
 
 class Config(unittest.TestCase):

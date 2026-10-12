@@ -41,8 +41,8 @@ def main() -> int:
         print("ERRO: --days tem de estar entre 1 e 365")
         return 1
     text = Path(a.file).read_text(encoding="utf-8", errors="replace") if a.file else os.environ.get(a.text_env, "")
-    if len(text) > 500_000:
-        print("ERRO: texto demasiado grande (máx. 500 000 carateres)")
+    if len(text) > 100_000:      # uma variável de ambiente no Linux só chega a 128 KiB; as caixas do workflow aceitam bastante menos
+        print("ERRO: texto demasiado grande (máx. 100 000 carateres); dividir em vários envios")
         return 1
 
     root = Path(a.root)

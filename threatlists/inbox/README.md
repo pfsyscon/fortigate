@@ -16,3 +16,5 @@ evil.example.com
 ```
 
 Ao expirar, o ficheiro deixa de contar e o build seguinte apaga-o.
+
+Limite por injeção: 100 000 carateres (acima disso, dividir em vários envios).
